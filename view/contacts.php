@@ -38,10 +38,10 @@ if(isset($_POST['submit'])){
 }
 
 if(isset($_POST['supPers'])){
-  $sc = $_POST['supPers'];
+  $sc = $_POST['select'];
   foreach($sc as $suppr)
   {
-    $rq = $bdd -> prepare("DELETE FROM personne WHERE nom = ?");
+    $rq = $bdd -> prepare("DELETE FROM personne WHERE idpersonne = ?");
     $rq->execute(array(
       $suppr
     ));
@@ -50,8 +50,6 @@ if(isset($_POST['supPers'])){
 }
 
 ?>
-
-
 
 
 <!DOCTYPE HTML>
@@ -72,13 +70,13 @@ if(isset($_POST['supPers'])){
         	while ($donnees = $resultat->fetch())
         	{ ?>
           	<tr>
-              <td><input type="checkbox" name="supPers[]" value="<?= $donnees['nom']?>" /></td>
+              <td><input type="checkbox" name="select[]" value="<?= $donnees['idpersonne']?>" /></td>
               <td><?= $donnees['nom']?></td>
           		<td><?= $donnees['prenom']?></td>
           		<td><?= $donnees['tel']?></td>
           		<td><?= $donnees['email']?></td>
           		<td><?= $donnees['nomsociete']?></td>
-            	<td><input type="submit" name="supPers[]" value="Supprimer" /></td>
+            	<td><input type="submit" name="supPers" value="Supprimer" /></td>
             </tr>
           <?php } ?>
         </table>
