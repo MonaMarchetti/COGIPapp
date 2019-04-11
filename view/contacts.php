@@ -87,7 +87,7 @@ if(isset($_POST['supPers'])){
         <p>Prénom:</p>
         <input type="text" name="prenom"><br>
         <p>Téléphone:</p>
-        <input type="number" name="tel"><br>
+        <input type="tel" name="tel"><br>
         <p>Email:</p>
         <input type="email" name="email"><br>
         <p>Societe:</p>
