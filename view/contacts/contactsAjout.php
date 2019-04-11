@@ -34,19 +34,7 @@ if(isset($_POST['submit'])){
       'tel' => $tel,
       'idsociete' => $idsociete
     )) ;
-    header('location:contacts.php'); //permet de rafraichir la page en y renvoyant automatiquement
-}
-
-if(isset($_POST['supPers'])){
-  $sc = $_POST['select'];
-  foreach($sc as $suppr)
-  {
-    $rq = $bdd -> prepare("DELETE FROM personne WHERE idpersonne = ?");
-    $rq->execute(array(
-      $suppr
-    ));
-  }
-  header('location:contacts.php');
+    header('location:contactsAjout.php'); //permet de rafraichir la page en y renvoyant automatiquement
 }
 
 ?>
@@ -58,7 +46,6 @@ if(isset($_POST['supPers'])){
       <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
         <table border='1'>
         	<tr>
-            <th>Check</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Téléphone</th>
@@ -70,13 +57,11 @@ if(isset($_POST['supPers'])){
         	while ($donnees = $resultat->fetch())
         	{ ?>
           	<tr>
-              <td><input type="checkbox" name="select[]" value="<?= $donnees['idpersonne']?>" /></td>
               <td><?= $donnees['nom']?></td>
           		<td><?= $donnees['prenom']?></td>
           		<td><?= $donnees['tel']?></td>
           		<td><?= $donnees['email']?></td>
           		<td><?= $donnees['nomsociete']?></td>
-            	<td><input type="submit" name="supPers" value="Supprimer" /></td>
             </tr>
           <?php } ?>
         </table>
