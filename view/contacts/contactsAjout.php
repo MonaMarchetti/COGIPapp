@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
         	while ($donnees = $resultat->fetch())
         	{ ?>
           	<tr>
-              <td><?= $donnees['nom']?></td>
+              <td><a href='contactsDetails.php?contact=<?= $donnees['idpersonne']?>'> <?= $donnees['nom']?></a></td>
           		<td><?= $donnees['prenom']?></td>
           		<td><?= $donnees['tel']?></td>
           		<td><?= $donnees['email']?></td>

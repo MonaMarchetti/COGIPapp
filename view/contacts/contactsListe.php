@@ -15,8 +15,6 @@ $resultat = $bdd->query('SELECT * FROM personne
     LEFT JOIN societe
     ON personne.idsociete = societe.idsociete
 		');
-
-$list = $bdd->query('SELECT * FROM societe');
 ?>
 
 <!DOCTYPE HTML>
