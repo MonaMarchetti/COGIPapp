@@ -85,7 +85,7 @@ if(isset($_POST['supSoc'])){
         <p>type: </p>
 				<select name="type">
           <?php
-					$list = $bdd->query('SELECT * FROM societe');
+					$list = $bdd->query('SELECT DISTINCT type FROM societe');
 
           foreach ($list as $value) {
 
