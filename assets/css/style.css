@@ -1,0 +1,12 @@
+body {
+  background-color: #f7a8f9;
+}
+
+header {
+  background-color: #5d1151;
+  color: #301458;
+}
+
+.fond {
+  background-image: url("assets/accountant.jpeg");
+}
