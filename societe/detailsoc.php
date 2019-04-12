@@ -2,7 +2,7 @@
 try
 {
 	// On se connecte à MySQL
-	$bdd= new PDO('mysql:host=localhost;dbname=Cogip;charset=utf8', 'user123', 'user123');
+$bdd= new PDO('mysql:host=localhost;dbname=id9271623_cogip;charset=utf8', 'id9271623_ragazzadb', 'IlaCatMo');
 }
 
 catch(Exception $e)
