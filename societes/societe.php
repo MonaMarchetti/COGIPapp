@@ -1,5 +1,6 @@
 
 <?php
+
 try
 {
 	// On se connecte à MySQL
@@ -67,12 +68,14 @@ if(isset($_POST['supSoc'])){
           	<tr>
               <td><input type="checkbox" name="select[]" value="<?= $donnees['idsociete']?>" /></td>
 							<td><?= $donnees['idsociete']?></td>
-							<td><?= $donnees['nomsociete']?></td>
+							<td><a href= "detailsoc.php?contact=<?= $donnees['idsociete']?>"><?= $donnees['nomsociete']?></a></td>
           		<td><?= $donnees['pays']?></td>
           		<td><?= $donnees['tva']?></td>
           		<td><?= $donnees['type']?></td>
             </tr>
-          <?php } ?>
+          <?php }
+
+			 ?>
         </table>
 
         <h1>Ajouter une société</h1>
