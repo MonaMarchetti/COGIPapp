@@ -4,7 +4,7 @@ $login_godmode = "Jean-Christian";
 $pwd_godmode = "Ranu";
 
 $login_modo = "Muriel";
-$pwd_modo = "Perrache";
+$pwd_modo = "Perrache"; 
 
 // on teste si nos variables sont définies
 if (isset($_POST['login']) && isset($_POST['pwd'])) {
