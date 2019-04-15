@@ -30,5 +30,12 @@ En cours: l'application est fonctionnelle mais on doit encore travailler sur le 
 4. CSS
 
 ### Pour visualiser le proget
-l'hebergeur de l'application est "000webhost". Cliker [ici](https://ragazzapp.000webhostapp.com/index.php) pour visiter l'application.
+l'hebergeur de l'application est "000webhost". Clicker [ici](https://ragazzapp.000webhostapp.com/index.php) pour visiter l'application.
 
+Pour se connecter en tant qu'admin: 
+  - Nom d'utilisateur : Jean-Christian
+  - Mot de passe: Ranu
+ 
+ Pour se connecter en tant que modérateur:
+  - Nom d'utilisateur : Muriel
+  - Mot de passe : Perrache
