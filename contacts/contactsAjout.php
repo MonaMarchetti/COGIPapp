@@ -11,7 +11,7 @@ catch(Exception $e)
         die('Erreur : '.$e->getMessage());
 }
 
-$resultat = $bdd->query('SELECT * FROM personne
+$resultatCont = $bdd->query('SELECT * FROM personne
     LEFT JOIN societe
     ON personne.idsociete = societe.idsociete
 		');
@@ -36,7 +36,6 @@ if(isset($_POST['submit'])){
     )) ;
     header('location:contactsAjout.php'); //permet de rafraichir la page en y renvoyant automatiquement
 }
-
 ?>
 
 
@@ -74,7 +73,7 @@ if(isset($_POST['submit'])){
 							</li>
 							<li class="nav-item ">
 								<a class="nav-link" href="../societe/socMod.php">Sociétés</a>
-							</li> 
+							</li>
 							<li class="nav-item active">
 								<a class="nav-link" href="../contacts/contactsAjout.php">Contacts</a>
 							</li>
@@ -86,7 +85,7 @@ if(isset($_POST['submit'])){
 				</nav>
 			</header>
 			<main>
-   
+
       <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
         <table border='1'>
         	<tr>
@@ -98,7 +97,7 @@ if(isset($_POST['submit'])){
           </tr>
 
         	<?php
-        	while ($donnees = $resultat->fetch())
+        	while ($donnees = $resultatCont->fetch())
         	{ ?>
           	<tr>
               <td><a href='contactsDetails.php?contact=<?= $donnees['idpersonne']?>'> <?= $donnees['nom']?></a></td>
@@ -131,7 +130,7 @@ if(isset($_POST['submit'])){
         </select><br>
         <button type="submit" name="submit" value="insert">Ajouter</button>
         </form>
-    
+
         </main>
       </body>
       </html>

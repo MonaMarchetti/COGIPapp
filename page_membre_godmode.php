@@ -9,14 +9,67 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
   {
   	// On se connecte à MySQL
   	$bdd= new PDO('mysql:host=localhost;dbname=id9271623_cogip;charset=utf8', 'id9271623_ragazzadb', 'IlaCatMo');
-
   }
   catch(Exception $e)
   {
   	// En cas d'erreur, on affiche un message et on arrête tout
-          die('Erreur : '.$e->getMessage());
+    die('Erreur : '.$e->getMessage());
   }
 
+$resultatFac = $bdd -> query ('SELECT * FROM factures
+    LEFT JOIN societe
+    ON factures.idsociete = societe.idsociete
+    ORDER BY datefacture ASC
+    LIMIT 5
+  ');
+
+$resultatCont = $bdd->query('SELECT * FROM personne
+    LEFT JOIN societe
+    ON personne.idsociete = societe.idsociete
+    ORDER BY idpersonne DESC
+    LIMIT 5
+  ');
+
+$resultatSoc = $bdd->query('SELECT * FROM societe
+    ORDER BY nomsociete ASC
+    LIMIT 5
+');
+
+if(isset($_POST['supFact'])){
+  $scf = $_POST['selFact'];
+  foreach($scf as $supprFact)
+  {
+    $rq = $bdd -> prepare("DELETE FROM factures WHERE idfactures = ?");
+    $rq->execute(array(
+      $supprFact
+    ));
+  }
+ header ('location: page_membre_godmode.php');
+}
+
+if(isset($_POST['supCont'])){
+  $scc = $_POST['selectCont'];
+  foreach($scc as $supprCont)
+  {
+    $rq = $bdd -> prepare("DELETE FROM personne WHERE idpersonne = ?");
+    $rq->execute(array(
+      $supprCont
+    ));
+  }
+  header ('location: page_membre_godmode.php');
+}
+
+if(isset($_POST['supSoc'])){
+  $scso = $_POST['selectSoc'];
+  foreach($scso as $supprSoc)
+  {
+    $rq = $bdd -> prepare("DELETE FROM societe WHERE idsociete = ?");
+    $rq->execute(array(
+      $supprSoc
+    ));
+  }
+  header ('location: page_membre_godmode.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +88,6 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
   <!--fontawesome-->
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
 </head>
 
 <body>
@@ -66,77 +118,42 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
       </nav>
     </header>
     <main>
+		    <h2>Bonjour!</h2>
+        <?php echo 'Bonjour '.$_SESSION['login'].' .';
+        // On affiche un lien pour fermer notre session
+        echo '<a href="./logout.php">Déconnexion</a>';
+        ?>
+				<div class="factures">
+					<h3>Dernières Factures : </h3>
+			    <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
+			      <table border='1'>
+							<tr>
+			          <th>Check</th>
+			          <th>N° Factures</th>
+			          <th>Dates</th>
+			          <th>Sociétés</th>
+			        </tr>
 
-						<h2>Bonjour!</h2>
-
-            <?php echo 'Bonjour '.$_SESSION['login'].' .';
-
-            // On affiche un lien pour fermer notre session
-            echo '<a href="./logout.php">Déconnection</a>';
-            ?>
-
-						<div class="factures">
-						<h3>Dernières Factures : </h3>
-			      <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
-			        <table border='1'>
-								<tr>
-			            <th>Check</th>
-			            <th>No Facture</th>
-			            <th>Dates</th>
-			            <th>Societe</th>
-			          </tr>
-
-			        	<?php
-
-								$resultat = $bdd -> query ('SELECT * FROM factures
-									LEFT JOIN societe
-									ON factures.idsociete= societe.idsociete
-									ORDER BY datefacture ASC
-									LIMIT 5
-								');
-
-								$resulSoc = $bdd -> query ('SELECT * FROM societe');
-
-			        	while ($donneesFac = $resultat->fetch())
+			        <?php
+			        	while ($donneesFac = $resultatFac->fetch())
 			        	{ ?>
 			          	<tr>
-			              <td><input type="checkbox" name="select[]" value="<?= $donneesFac['idfactures']?>" /></td>
+			              <td><input type="checkbox" name="selFact[]" value="<?= $donneesFac['idfactures']?>" /></td>
 										<td><?= $donneesFac['numfacture']?></td>
 										<td><?= $donneesFac['datefacture']?></td>
 			          		<td><?= $donneesFac['nomsociete']?></td>
-
 			            </tr>
 			          <?php }
-
-
-								if(isset($_POST['supFact'])){
-								  $sc = $_POST['select'];
-								  foreach($sc as $suppr)
-								  {
-								    $rq = $bdd -> prepare("DELETE FROM factures WHERE idfactures = ?");
-								    $rq->execute(array(
-								      $suppr
-								    ));
-								  }
-								  header('location:accueil.php');
-								}
-								?>
+                ?>
 			        </table>
 
-								<input type="submit" name="supFact" value="Supprimer" />
-							</form>
-						</div>
+						  <input type="submit" name="supFact" value="Supprimer" />
+					  </form>
+			    </div>
 
-
-
-
-
-
-
-
-						<div class="contacts">
-							<h3>Derniers Contacts : </h3>
-				      <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
+				<div class="contacts">
+					<h3>Derniers Contacts : </h3>
+				    <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
 				        <table border='1'>
 									<tr>
 				            <th>Check</th>
@@ -144,19 +161,10 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 										<th>Prénom</th>
 										<th>Email</th>
 				            <th>Téléphone</th>
-				            <th>Societe</th>
+				            <th>Société</th>
 				          </tr>
 
-				        	<?php
-
-									$resultatCont = $bdd->query('SELECT * FROM personne
-										LEFT JOIN societe
-										ON personne.idsociete = societe.idsociete
-										ORDER BY idpersonne DESC
-										LIMIT 5
-
-									');
-
+                	<?php
 				        	while ($donnees = $resultatCont->fetch())
 				        	{ ?>
 				          	<tr>
@@ -168,39 +176,12 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 											<td><?= $donnees['nomsociete']?></td>
 				            </tr>
 				          <?php }
-
-									if(isset($_POST['supCont'])){
-										$sc = $_POST['selectCont'];
-										foreach($sc as $suppr)
-										{
-											$rq = $bdd -> prepare("DELETE FROM personne WHERE idpersonne = ?");
-											$rq->execute(array(
-												$suppr
-											));
-										}
-										header('location:accueil.php');
-									}
-
-
 									?>
 				        </table>
 
-									<input type="submit" name="supCont" value="Supprimer" />
-								</form>
-
+								<input type="submit" name="supCont" value="Supprimer" />
+							</form>
 						</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 						<div class="societes">
 							<h3>Dernières Sociétés : </h3>
@@ -215,13 +196,6 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 									</tr>
 
 									<?php
-
-									$resultatSoc = $bdd->query('SELECT * FROM societe
-										ORDER BY nomsociete ASC
-										LIMIT 5
-
-									');
-
 									while ($donnees = $resultatSoc ->fetch())
 									{ ?>
 										<tr>
@@ -232,37 +206,17 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 											<td><?= $donnees['type']?></td>
 										</tr>
 									<?php }
-
-								if(isset($_POST['supSoc'])){
-									$sc = $_POST['selectSoc'];
-									foreach($sc as $suppr)
-									{
-										$rq = $bdd -> prepare("DELETE FROM societe WHERE idsociete = ?");
-										$rq->execute(array(
-											$suppr
-										));
-									}
-									header('location:accueil.php');
-								}
-
-									?>
+								  ?>
 								</table>
-
-									<input type="submit" name="supSoc" value="Supprimer" />
-								</form>
+								<input type="submit" name="supSoc" value="Supprimer" />
+							</form>
 						</div>
-  </main>
-</body>
-</html>
-
+          </main>
+        </body>
+      </html>
 <?php
-
 }
 else {
   echo 'Les variables ne sont pas déclarées.';
 }
-?>
-
-<?php
-
 ?>

@@ -3,7 +3,7 @@
   try
   {
   	// On se connecte à MySQL
-  	$bdd= new PDO('mysql:host=localhost;dbname=id9271623_cogip;charset=utf8', 'id9271623_ragazzadb', 'IlaCatMo');
+  	$bdd= new PDO('mysql:host=localhost;dbname=id9271623_cogip;charset=utf8', 'root');
 
   }
   catch(Exception $e)
@@ -25,15 +25,12 @@
   <!--CSS made in bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <!--my CSS-->
-  <link rel="stylesheet" href="assets/css/style.css">
-
   <!--fontawesome-->
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 </head>
 
-<body>
+<body style="background-color: #ccccff; font-size: 18pt;">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #30032c;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,13 +57,17 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main class="container">
+          <div class="row justify-content-md-center mb-5 mt-3">
+            <div class="col-md-6">
+              <h1>Bonjour cher visiteur!</h1>
+            </div>
+          </div>
 
-						<h2>Bonjour cher visiteur!</h2>
-
-						<div class="factures">
-						<h3>Dernières Factures : </h3>
-			        <table border='1'>
+						<div class="row justify-content-md-center mb-5">
+              <div class="col-md-6">
+						<h2>Dernières Factures : </h2>
+			        <table border='1' style="width: 108%;">
 								<tr>
 			            <th>No Facture</th>
 			            <th>Dates</th>
@@ -96,10 +97,11 @@
 								?>
 			        </table>
 						</div>
-
-						<div class="contacts">
-							<h3>Derniers Contacts : </h3>
-				        <table border='1'>
+          </div>
+          <div class="row justify-content-md-center mb-5">
+						<div class="col-md-6">
+							<h2>Derniers Contacts : </h2>
+				        <table border='1' style="width: 100%;">
 									<tr>
 				            <th>Nom</th>
 										<th>Prénom</th>
@@ -133,10 +135,11 @@
 				        </table>
 								</form>
 						</div>
-
-						<div class="societes">
-							<h3>Dernières Sociétés : </h3>
-								<table border='1'>
+          </div>
+          <div class="row justify-content-md-center mb-5">
+						<div class="col-md-6">
+							<h2>Dernières Sociétés : </h2>
+								<table border='1' style="width: 108%;">
 									<tr>
 										<th>Nom Société</th>
 										<th>TVA</th>
@@ -166,6 +169,7 @@
 									?>
 								</table>
 						</div>
+          </div>
   </main>
 </body>
 </html>
