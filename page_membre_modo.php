@@ -37,7 +37,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 
-<body>
+<body style="background-color: #ccccff; font-size: 18pt;">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #30032c;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,16 +64,22 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
         </div>
       </nav>
     </header>
-    <main>
-			<h2>Bonjour!</h2>
-      <?php echo 'Bonjour '.$_SESSION['login'].'';
-      // On affiche un lien pour fermer notre session
-      echo '<a href="./logout.php">Déconnexion</a>';
+    <main class="container">
+      <div class="row justify-content-md-center mb-5 mt-3">
+        <div class="col-md-6">
+          <h2>Bonjour!</h2>
+          <?php echo 'Bonjour '.$_SESSION['login'].'';
+          // On affiche un lien pour fermer notre session
+          echo '<a href="./logout.php">Déconnexion</a>';
       ?>
-			<div class="factures">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center mb-5">
+        <div class="col-md-6">
 				<h3>Dernières Factures : </h3>
 			  <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
-			    <table border='1'>
+          <table border='1' style="width: 108%;">
 						<tr>
 			        <th>Factures</th>
 			        <th>Dates</th>
@@ -101,14 +107,16 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 							}
 							?>
 			     </table>
+         </div>
+       </div>
 				</form>
-		  </div>
 
-			<div class="contacts">
+        <div class="row justify-content-md-center mb-5">
+          <div class="col-md-6">
 				<h3>Derniers Contacts : </h3>
 				<form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
-				  <table border='1'>
-					  <tr>
+  <table border='1' style="width: 100%;">
+    			  <tr>
 				      <th>Nom</th>
 							<th>Prénom</th>
 							<th>Email</th>
@@ -138,11 +146,13 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 				  </table>
 				</form>
 			</div>
+    </div>
 
-		  <div class="societes">
+    <div class="row justify-content-md-center mb-5">
+      <div class="col-md-6">
 				<h3>Dernières Sociétés : </h3>
 					<form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
-						<table border="1">
+            <table border='1' style="width: 108%;">
 							<tr>
 							  <th>Nom Société</th>
 								<th>TVA</th>
@@ -167,6 +177,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						</table>
 					</form>
 			</div>
+    </div>
   </main>
 </body>
 </html>
