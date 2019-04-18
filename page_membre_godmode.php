@@ -90,7 +90,7 @@ if(isset($_POST['supSoc'])){
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 
-<body>
+<body style="background-color: #ccccff; font-size: 18pt;">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #30032c;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,13 +117,16 @@ if(isset($_POST['supSoc'])){
         </div>
       </nav>
     </header>
-    <main>
-		    <h2>Bonjour!</h2>
-        <?php echo 'Bonjour '.$_SESSION['login'].' .';
-        // On affiche un lien pour fermer notre session
-        echo '<a href="./logout.php">Déconnexion</a>';
-        ?>
-				<div class="factures">
+    <main class="container">
+      <div class="row justify-content-md-center mb-5 mt-3">
+        <div class="col-md-6">
+          <?php echo "<h2>Bonjour ".$_SESSION['login']."!</h2><br><a href='./logout.php'>Déconnexion</a>"
+          ?>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center mb-5 mt-3">
+        <div class="col-md-6">
 					<h3>Dernières Factures : </h3>
 			    <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
 			      <table border='1'>
@@ -149,9 +152,11 @@ if(isset($_POST['supSoc'])){
 
 						  <input type="submit" name="supFact" value="Supprimer" />
 					  </form>
-			    </div>
+          </div>
+        </div>
 
-				<div class="contacts">
+        <div class="row justify-content-md-center mb-5 mt-3">
+          <div class="col-md-6">
 					<h3>Derniers Contacts : </h3>
 				    <form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
 				        <table border='1'>
@@ -181,9 +186,11 @@ if(isset($_POST['supSoc'])){
 
 								<input type="submit" name="supCont" value="Supprimer" />
 							</form>
-						</div>
+            </div>
+          </div>
 
-						<div class="societes">
+          <div class="row justify-content-md-center mb-5 mt-3">
+            <div class="col-md-6">
 							<h3>Dernières Sociétés : </h3>
 							<form style="margin:10px" method="post" enctype = "multipart/form-data" action="">
 								<table border='1'>
@@ -210,7 +217,8 @@ if(isset($_POST['supSoc'])){
 								</table>
 								<input type="submit" name="supSoc" value="Supprimer" />
 							</form>
-						</div>
+            </div>
+          </div>
           </main>
         </body>
       </html>
